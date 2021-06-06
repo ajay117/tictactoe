@@ -1,19 +1,11 @@
+let playGame = (() => {
     let isGameOver = false;    
     let containerChildDiv = document.querySelectorAll('.game-container div');
     let [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
     let playerTurn = 1;
     let resetButton = document.querySelector('.reset-button');
 
-    resetButton.addEventListener('click', reset);
-
-    function reset() {
-        containerChildDiv.forEach(item => {
-            item.textContent = '';
-        });
-        [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
-        isGameOver = false;
-        playerTurn = 1;
-    }
+    resetButton.addEventListener('click', reset);    
     containerChildDiv.forEach(item => {
         item.addEventListener('click', () => {
             if(isGameOver === true) {
@@ -40,8 +32,7 @@
         });
     });
 
-    //Check if the game is finished  
-    //Console.log who wins
+    //Functions...
     function play() {
         if(!isGameOver) {
             if((one.textContent === 'X' && two.textContent === 'X' && three.textContent === 'X') || 
@@ -71,4 +62,14 @@
                 }
         }
     }
+
+    function reset() {
+        containerChildDiv.forEach(item => {
+            item.textContent = '';
+        });
+        [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
+        isGameOver = false;
+        playerTurn = 1;
+    }
+})();
     
