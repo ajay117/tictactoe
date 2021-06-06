@@ -20,20 +20,22 @@
                 console.log('Please restart the game.');
                 return;
             }
-            if(playerTurn === 1) {               
-                item.textContent = 'X';
-                item.classList.add('text');                
-                playerTurn += 1;
-                containerChildDiv = document.querySelectorAll('.game-container div');
-                [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
-                play();
-            } else {
-                item.textContent = 'O';
-                item.classList.add('text');
-                playerTurn -= 1;
-                containerChildDiv = document.querySelectorAll('.game-container div');
-                [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv; 
-                play();
+            if(!item.textContent) {
+                if(playerTurn === 1) {               
+                    item.textContent = 'X';
+                    item.classList.add('text');                
+                    playerTurn += 1;
+                    containerChildDiv = document.querySelectorAll('.game-container div');
+                    [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
+                    play();
+                } else {
+                    item.textContent = 'O';
+                    item.classList.add('text');
+                    playerTurn -= 1;
+                    containerChildDiv = document.querySelectorAll('.game-container div');
+                    [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv; 
+                    play();
+                }
             }
         });
     });
