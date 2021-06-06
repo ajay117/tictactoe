@@ -4,6 +4,7 @@ let playGame = (() => {
     let [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
     let playerTurn = 1;
     let resetButton = document.querySelector('.reset-button');
+    let alertPlayer = document.querySelector('.alert');
 
     resetButton.addEventListener('click', reset);    
     containerChildDiv.forEach(item => {
@@ -44,7 +45,8 @@ let playGame = (() => {
             (two.textContent === 'X' && five.textContent === 'X'&& eight.textContent === 'X') ||
             (four.textContent === 'X' && five.textContent === 'X'&& six.textContent === 'X')) {
                 isGameOver = true;
-                console.log('Player 1 Wins.');
+                alertPlayer.textContent = 'Player 1 wins the game.';
+                alertPlayer.classList.add('alert-player');                
             } else if((one.textContent === 'O' && two.textContent === 'O' && three.textContent === 'O') || 
             (one.textContent === 'O' && four.textContent === 'O' && seven.textContent === 'O') ||
             (one.textContent === 'O' && five.textContent === 'O' && nine.textContent === 'O') ||
@@ -54,11 +56,13 @@ let playGame = (() => {
             (two.textContent === 'O' && five.textContent === 'O' && eight.textContent === 'O') ||
             (four.textContent === 'O' && five.textContent === 'O'&& six.textContent === 'O')) {
                 isGameOver = true;
-                console.log('Player 2 Wins.');
+                alertPlayer.textContent = 'Player 2 wins the game.';
+                alertPlayer.classList.add('alert-player');
             } else if(one.textContent && two.textContent && three.textContent &&
                 four.textContent && five.textContent && six.textContent &&
                 seven.textContent && eight.textContent && nine.textContent) {
-                    console.log('Draw');
+                    alertPlayer.textContent = 'Draw! Click Reset to play again.';
+                    alertPlayer.classList.add('alert-player');
                 }
         }
     }
@@ -67,6 +71,8 @@ let playGame = (() => {
         containerChildDiv.forEach(item => {
             item.textContent = '';
         });
+        alertPlayer.textContent = '';
+        alertPlayer.classList.remove('alert-player');
         [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
         isGameOver = false;
         playerTurn = 1;
