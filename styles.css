@@ -6,8 +6,8 @@ main {
 }
 button {
     margin-top: 20px;
-    width: 100px;
-    heigth: 50px;
+    width: 150px;
+    height: 30px;
 }
 .game {
     width: 90%;
@@ -25,4 +25,10 @@ button {
 .text {
     text-align: center;
     line-height: 80px;
+}
+.alert-player {
+    width: 100%;
+    background: aquamarine;
+    height: 50px;
+    line-height: 50px;    
 }
