@@ -1,22 +1,26 @@
     let isGameOver = false;    
-    let containerChildDiv = document.querySelectorAll('div.container div');
+    let containerChildDiv = document.querySelectorAll('.game-container div');
     let [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
     let playerTurn = 1;
 
     containerChildDiv.forEach(item => {
         item.addEventListener('click', () => {
+            if(isGameOver === true) {
+                console.log('Please restart the game.');
+                return;
+            }
             if(playerTurn === 1) {               
                 item.textContent = 'X';
                 item.classList.add('text');                
                 playerTurn += 1;
-                containerChildDiv = document.querySelectorAll('div.container div');
+                containerChildDiv = document.querySelectorAll('.game-container div');
                 [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
                 play();
             } else {
                 item.textContent = 'O';
                 item.classList.add('text');
                 playerTurn -= 1;
-                containerChildDiv = document.querySelectorAll('div.container div');
+                containerChildDiv = document.querySelectorAll('.game-container div');
                 [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv; 
                 play();
             }
@@ -36,7 +40,7 @@
             (two.textContent === 'X' && five.textContent === 'X'&& eight.textContent === 'X') ||
             (four.textContent === 'X' && five.textContent === 'X'&& six.textContent === 'X')) {
                 isGameOver = true;
-                console.log('You win X');
+                console.log('Player 1 Wins.');
             } else if((one.textContent === 'O' && two.textContent === 'O' && three.textContent === 'O') || 
             (one.textContent === 'O' && four.textContent === 'O' && seven.textContent === 'O') ||
             (one.textContent === 'O' && five.textContent === 'O' && nine.textContent === 'O') ||
@@ -46,7 +50,7 @@
             (two.textContent === 'O' && five.textContent === 'O' && eight.textContent === 'O') ||
             (four.textContent === 'O' && five.textContent === 'O'&& six.textContent === 'O')) {
                 isGameOver = true;
-                console.log('You win O');
+                console.log('Player 2 Wins.');
             } else if(one.textContent && two.textContent && three.textContent &&
                 four.textContent && five.textContent && six.textContent &&
                 seven.textContent && eight.textContent && nine.textContent) {
