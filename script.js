@@ -2,7 +2,18 @@
     let containerChildDiv = document.querySelectorAll('.game-container div');
     let [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
     let playerTurn = 1;
+    let resetButton = document.querySelector('.reset-button');
 
+    resetButton.addEventListener('click', reset);
+
+    function reset() {
+        containerChildDiv.forEach(item => {
+            item.textContent = '';
+        });
+        [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
+        isGameOver = false;
+        playerTurn = 1;
+    }
     containerChildDiv.forEach(item => {
         item.addEventListener('click', () => {
             if(isGameOver === true) {
