@@ -1,23 +1,55 @@
-let playGame = (() => {
     let isGameOver = false;    
     let containerChildDiv = document.querySelectorAll('.game-container div');
     let [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
     let playerTurn = 1;
     let resetButton = document.querySelector('.reset-button');
     let alertPlayer = document.querySelector('.alert');
+    let playWithComputer = document.querySelector('.computer');
+    let playWithHuman = document.querySelector('.human');
+    let computerPlay = false;
+    
+    
+    function computerTurn() {
+        let indexArray = [];
+        let containerChildDiv = document.querySelectorAll('.game-container div');
+        updateIndexArray();
+        
+        let randomNum = Math.floor(Math.random() * indexArray.length);
+        let randomBox = indexArray[randomNum];
+        
+            if(computerPlay && indexArray.length > 2) {
+                containerChildDiv[randomBox].textContent = 'O';
+                containerChildDiv[randomBox].classList.add('text');
+                playerTurn -= 1;
+                computerPlay = false;
+            }
 
-    resetButton.addEventListener('click', reset);    
+        function updateIndexArray() {
+            for(let i = 0; i < containerChildDiv.length; i++) {
+                if(containerChildDiv[i].textContent !== 'X' &&
+                 containerChildDiv[i].textContent !== 'O') {
+                    indexArray.push(i);
+                }
+            }
+        }
+    }
+
+    resetButton.addEventListener('click', reset);
+
     containerChildDiv.forEach(item => {
         item.addEventListener('click', () => {
             if(isGameOver === true) {
-                console.log('Please restart the game.');
                 return;
             }
             if(!item.textContent) {
                 if(playerTurn === 1) {               
                     item.textContent = 'X';
-                    item.classList.add('text');                
+                    item.classList.add('text');
                     playerTurn += 1;
+                    computerPlay = true;
+                    if(computerPlay) {
+                        computerTurn();
+                    }
                     containerChildDiv = document.querySelectorAll('.game-container div');
                     [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;
                     play();
@@ -26,7 +58,7 @@ let playGame = (() => {
                     item.classList.add('text');
                     playerTurn -= 1;
                     containerChildDiv = document.querySelectorAll('.game-container div');
-                    [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv; 
+                    [one,two,three,four,five,six,seven,eight,nine] = containerChildDiv;                     
                     play();
                 }
             }
@@ -77,5 +109,4 @@ let playGame = (() => {
         isGameOver = false;
         playerTurn = 1;
     }
-})();
     
