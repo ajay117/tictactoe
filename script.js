@@ -4,11 +4,32 @@
     let playerTurn = 1;
     let resetButton = document.querySelector('.reset-button');
     let alertPlayer = document.querySelector('.alert');
-    let playWithComputer = document.querySelector('.computer');
-    let playWithHuman = document.querySelector('.human');
+    let playWithComputer = document.querySelector('.with-computer');
+    let playWithHuman = document.querySelector('.with-human');
     let computerPlay = false;
+    let computerOn;
+    let humanOn = false;
     
-    
+    // playWithComputer.addEventListener('click', () => {
+    //     computerOn = true;
+    // });
+
+    playWithHuman.addEventListener('click', () => {
+        playerTurn = 1;
+        containerChildDiv.forEach(item => item.textContent = '');
+        humanOn = true;
+        playWithComputer.classList.remove('hide');
+        playWithHuman.classList.add('hide');
+    });
+
+    playWithComputer.addEventListener('click', () => {
+        playerTurn = 1;
+        containerChildDiv.forEach(item => item.textContent = '');
+        humanOn = false;
+        playWithComputer.classList.add('hide');
+        playWithHuman.classList.remove('hide');
+    });
+
     function computerTurn() {
         let indexArray = [];
         let containerChildDiv = document.querySelectorAll('.game-container div');
@@ -17,7 +38,7 @@
         let randomNum = Math.floor(Math.random() * indexArray.length);
         let randomBox = indexArray[randomNum];
         
-            if(computerPlay && indexArray.length > 2) {
+            if(computerPlay && indexArray.length >= 2) {
                 containerChildDiv[randomBox].textContent = 'O';
                 containerChildDiv[randomBox].classList.add('text');
                 playerTurn -= 1;
@@ -47,7 +68,7 @@
                     item.classList.add('text');
                     playerTurn += 1;
                     computerPlay = true;
-                    if(computerPlay) {
+                    if(computerPlay && !humanOn) {
                         computerTurn();
                     }
                     containerChildDiv = document.querySelectorAll('.game-container div');
